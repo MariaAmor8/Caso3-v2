@@ -28,7 +28,7 @@ public class ServidorDelegado {
 
             while (delegadosActivos < maxDelegados) {
                 Socket clientSocket = ss.accept();
-                System.out.println("Nuevo cliente conectado: " + clientSocket.getInetAddress());
+                System.out.println("Nuevo cliente conectado ");
 
                 // Crear un delegado para manejar la conexión del cliente
                 ManejadorCliente delegado = new ManejadorCliente(clientSocket, deposito, cifradoSimetrico, tiempo,SSLPath);

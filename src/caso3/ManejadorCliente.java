@@ -28,13 +28,13 @@ public class ManejadorCliente extends Thread {
             PrintWriter escritor = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader lector = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
         ) {
-            System.out.println("Delegado iniciado para el cliente: " + clientSocket.getInetAddress());
+            System.out.println("Delegado iniciado para el cliente ");
 
             // Ejecuta el protocolo para manejar la solicitud del cliente es iteartivo creo que sirve igual
             ProtocoloServidorIterativo protocolo = new ProtocoloServidorIterativo();
             protocolo.procesar(lector, escritor, deposito, cifradoSimetrico, tiempo,SSLPath);
 
-            System.out.println("Cliente procesado y desconectado: " + clientSocket.getInetAddress());
+            System.out.println("Cliente procesado y desconectado ");
 
         } catch (Exception e) {
             System.err.println("Error en el delegado del cliente: " + e.getMessage());
