@@ -98,19 +98,22 @@ public class ProtocoloServidorIterativo {
 		System.out.println("S: Estado del paquete: " + estadoPaquete);	
 
 		//cifrar estado del paquete y enviar
-		//si usa cifrado asimetrico
 
+		//si usa cifrado asimetrico
+		String estadoCifrado;
 		if(!this.cifradoSimetrico) {
-			tiempo.iniciar(Tiempo.CIFRAR_PAQUETE_ASIMETRICO);
+			tiempo.iniciar(Tiempo.CIFRAR_PAQUETE);
 			this.llaveRSA.cifrarMensaje(publicKeyServidor, estadoPaquete);
-			tiempo.detener(Tiempo.CIFRAR_PAQUETE_ASIMETRICO);
+			tiempo.detener(Tiempo.CIFRAR_PAQUETE);
+			estadoCifrado = this.cifradoAES.cifrarMensajeAES(llaveAES, estadoPaquete, vi);
+		}
+		else{
+			tiempo.iniciar(Tiempo.CIFRAR_PAQUETE);
+			estadoCifrado = this.cifradoAES.cifrarMensajeAES(llaveAES, estadoPaquete, vi);
+			tiempo.detener(Tiempo.CIFRAR_PAQUETE);
 		}
 
-		String estadoCifrado = this.cifradoAES.cifrarMensajeAES(llaveAES, estadoPaquete, vi);
 		pOut.println(estadoCifrado);
-
-
-
 
 		//hacer hash del estado del paquete y eviar
 		String hashEstado = this.cifradoHMAC.cifrarConHMAC(estadoPaquete, llaveHMAC);
