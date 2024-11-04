@@ -13,7 +13,7 @@ public class Iterativo {
 		si.setSimetrico(cifradoSimetrico); // para sabe si el estado del paquete debe ser cifrado simetricamente o no
 		si.setTiempo(tiempo);
 		si.setSSLPath(SSLPath);
-		clienteI.setEsIterativo(true);
+		
 		si.start();
 		clienteI.start();
 		

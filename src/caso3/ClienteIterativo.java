@@ -12,7 +12,6 @@ public class ClienteIterativo extends Thread{
 	public static final String SERVIDOR = "localhost";
 	int idCliente;
 	int idPaquete;
-	boolean esIterativo= false;
 	
 	public void run() {
 		//System.out.println("Cliente I ");
@@ -49,11 +48,9 @@ public class ClienteIterativo extends Thread{
 
 		// se ejecuta el protocolo en el lado cliente
 		ProtocoloClienteIterativo pci = new ProtocoloClienteIterativo();
-		for (int i = 0; i < 32; i++) {
-			System.out.println("Realizando consulta " + (i + 1) + " de 32.");
-			System.out.println("boom");
-			pci.procesar(stdIn, lector, escritor, this.idCliente, this.idPaquete);
-		}
+		pci.procesar(stdIn, lector, escritor, this.idCliente, this.idPaquete);
+
+
 		// se cierran los flujos y el socket
 		stdIn.close();
 		escritor.close();
@@ -66,10 +63,6 @@ public class ClienteIterativo extends Thread{
 		this.idCliente = idCliente;
 		this.idPaquete = idCliente; //por facilidad, el id del paquete del cliente es igual a su id
 	}
-
-    public void setEsIterativo(boolean esIterativo) {
-        this.esIterativo = esIterativo;
-    }
 	
 
 
