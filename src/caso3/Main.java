@@ -101,6 +101,9 @@ public class Main {
 			ClienteConDelegados.iniciar(maxClientes);
 			try {
 				servidorThread.join();
+				System.out.println("TERMINO");
+				System.out.println("Tiempos: ");
+				tiempo.imprimirResultados();
 			} catch (InterruptedException e) {
 				System.err.println("Error al esperar que el servidor termine.");
 				e.printStackTrace();
