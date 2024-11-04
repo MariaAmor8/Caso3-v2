@@ -24,7 +24,7 @@ public class ClienteDelegado extends Thread {
         ) {
             System.out.println("Cliente " + idCliente + " conectado al servidor.");
 
-            // Ejecutar el protocolo de comunicación
+            // Iterativo creo que sirve
             ProtocoloClienteIterativo protocolo = new ProtocoloClienteIterativo();
             protocolo.procesar(new BufferedReader(new InputStreamReader(System.in)), lector, escritor, idCliente, idPaquete);
 

@@ -11,16 +11,14 @@ public class ClienteConDelegados {
 
         // Crear y ejecutar múltiples instancias de ClienteDelegado
         for (int i = 0; i < numeroClientes; i++) {
-            // Asigna el mismo id para cliente y paquete
             ClienteDelegado cliente = new ClienteDelegado(i, i);
             clientes.add(cliente);
             cliente.start();
         }
 
-        // Esperar a que todos los clientes terminen
         for (ClienteDelegado cliente : clientes) {
             try {
-                cliente.join(); // Espera a que el hilo del cliente termine
+                cliente.join(); 
             } catch (InterruptedException e) {
                 System.err.println("Error esperando al cliente: " + cliente.getId());
                 e.printStackTrace();

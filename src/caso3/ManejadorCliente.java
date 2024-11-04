@@ -30,7 +30,7 @@ public class ManejadorCliente extends Thread {
         ) {
             System.out.println("Delegado iniciado para el cliente: " + clientSocket.getInetAddress());
 
-            // Ejecuta el protocolo para manejar la solicitud del cliente
+            // Ejecuta el protocolo para manejar la solicitud del cliente es iteartivo creo que sirve igual
             ProtocoloServidorIterativo protocolo = new ProtocoloServidorIterativo();
             protocolo.procesar(lector, escritor, deposito, cifradoSimetrico, tiempo,SSLPath);
 
@@ -41,7 +41,7 @@ public class ManejadorCliente extends Thread {
             e.printStackTrace();
         } finally {
             try {
-                clientSocket.close(); // Cierra el socket después de procesar la solicitud
+                clientSocket.close(); // Cierra el socket después de procesar la solicitud supongamos sirve
             } catch (IOException e) {
                 System.err.println("Error al cerrar el socket del cliente: " + e.getMessage());
             }
