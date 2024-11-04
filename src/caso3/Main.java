@@ -20,7 +20,7 @@ public class Main {
 	}
 	
 	public void imprmirMenu() {
-		System.out.println("------------ Menu -----------");
+		System.out.println("--------------- Menu ---------------");
 		System.out.println("Elija una opcion: ");
 		System.out.println("1. Generar llaves asimetricas del servidor");
 		System.out.println("2. Generar servidor iterativo");

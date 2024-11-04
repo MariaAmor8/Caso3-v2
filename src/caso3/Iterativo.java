@@ -12,18 +12,12 @@ public class Iterativo {
 											// no
 		si.setSSLPath(SSLPath);
 
-		Tiempo tiempo = new Tiempo();
-		si.setTiempo(tiempo);
-
 		si.start();
 		clienteI.start();
 
 		si.join();
 		clienteI.join();
-		System.out.println("TERMINO");
-		System.out.println("Tiempos: ");
-		tiempo.imprimirResultados();
-
+		System.out.println("FIN");
 	}
 
 }

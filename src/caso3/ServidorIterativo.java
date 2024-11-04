@@ -12,7 +12,6 @@ public class ServidorIterativo extends Thread {
 	public static final int PUERTO = 3400;
 	public static Deposito deposito;
 	boolean cifradoSimetrico;
-	Tiempo tiempo;
 	String SSLPath;
 	
 	public void run() {
@@ -24,52 +23,12 @@ public class ServidorIterativo extends Thread {
 		}
 	}
 
-	/*/
-	public void iniciar() throws IOException {
-		ServerSocket ss = null;
-
-	    //System.out.println("Main Server ...");
-
-	    try {
-	        ss = new ServerSocket(PUERTO);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        System.exit(-1);
-	    }
-
-	    
-	    // crear el socket en el lado servidor
-	    // queda bloqueado esperando a que llegue un cliente
-	    Socket socket = ss.accept();
-
-	    try {
-	    	// se conectan los flujos, tanto de salida como de entrada
-	    	PrintWriter escritor = new PrintWriter(socket.getOutputStream(), true);
-	    	BufferedReader lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-	    	// se ejecuta el protocolo en el lado servidor
-	    	ProtocoloServidorIterativo psi = new ProtocoloServidorIterativo();
-
-	    	psi.procesar(lector, escritor, deposito, this.cifradoSimetrico, this.tiempo, this.SSLPath);
-
-	    	// se cierran los flujos y el socket
-	    	escritor.close();
-	    	lector.close();
-	    	socket.close();
-	 
-	    } catch (Exception e) {
-	    	e.printStackTrace();
-	    }
-
-	}
-		/*/ 
 
 		public void iniciar() throws IOException {
 			ServerSocket ss = null;
 	
 			try {
 				ss = new ServerSocket(PUERTO);
-				System.out.println("Servidor iterativo esperando conexiones en el puerto " + PUERTO);
 			} catch (IOException e) {
 				e.printStackTrace();
 				System.exit(-1);
@@ -77,7 +36,6 @@ public class ServidorIterativo extends Thread {
 	
 			// Espera y acepta la conexión de un cliente
 			Socket socket = ss.accept();
-			System.out.println("Cliente conectado");
 	
 			try (
 				PrintWriter escritor = new PrintWriter(socket.getOutputStream(), true);
@@ -90,12 +48,13 @@ public class ServidorIterativo extends Thread {
 				int consultas = 0;
 				while (consultas < 32) {
 					// Procesa una consulta
-					psi.procesar(lector, escritor, deposito, this.cifradoSimetrico, this.tiempo, this.SSLPath);
+					Tiempo tiempoConsulta = new Tiempo();
+					psi.procesar(lector, escritor, deposito, this.cifradoSimetrico, tiempoConsulta, this.SSLPath);
 	
 					// Espera un mensaje del cliente para saber si debe continuar
 					String mensaje = lector.readLine();
+					tiempoConsulta.imprimirResultados();
 					if ("TERMINAR".equals(mensaje)) {
-						System.out.println("S: Cliente ha terminado la conexión");
 						consultas++; 
 					}
 				}
@@ -104,7 +63,7 @@ public class ServidorIterativo extends Thread {
 			} finally {
 				// Cierra el socket después de que el cliente haya terminado todas sus consultas
 				socket.close();
-				System.out.println("Conexión cerrada");
+				//System.out.println("Conexión cerrada");
 			}
 		}
 	
@@ -116,10 +75,6 @@ public class ServidorIterativo extends Thread {
 		this.cifradoSimetrico = cifradoSimetrico;
 	}
 	
-	public void setTiempo(Tiempo tiempo) {
-		this.tiempo = tiempo;
-	}
-
 	public void setSSLPath(String SSLPath){
 		this.SSLPath = SSLPath;
 	}

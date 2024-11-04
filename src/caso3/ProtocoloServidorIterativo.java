@@ -42,7 +42,7 @@ public class ProtocoloServidorIterativo {
 				// mandar vector de inicialización vi
 				byte[] vi = this.cifradoAES.generarIV();
 				String viString = Base64.getEncoder().encodeToString(vi);
-				//System.out.println("S: VI " + viString);
+				System.out.println("S: Envío iv ");
 				pOut.println(viString);
 				
 				//medir el tiempo que se demora en verificar la consulta
@@ -114,15 +114,7 @@ public class ProtocoloServidorIterativo {
 
 		//hacer hash del estado del paquete y eviar
 		String hashEstado = this.cifradoHMAC.cifrarConHMAC(estadoPaquete, llaveHMAC);
-		pOut.println(hashEstado);
-
-		//leer terminar
-		/*/
-		String terminar = pIn.readLine();
-		if(terminar.equals("TERMINAR")) {
-			System.out.println("S: conexión finalizada");
-		}
-		/*/ 
+		pOut.println(hashEstado); 
 
 	}
 
@@ -135,25 +127,21 @@ public class ProtocoloServidorIterativo {
 		this.privateKeyServidor = llavePrivada;
 		this.publicKeyServidor = llavePublica;
 
-		System.out.println("S: Llave publica rescatada");
-		System.out.println("S: Llave privada rescatada");
-
 		String inputLine = pIn.readLine();
 		System.out.println("S: palabra de inicio recibida: "+ inputLine);
 
 		//Recibir R  y calcular Rta > rta = descifrar con llave privada R
 		String R = pIn.readLine();
-		//System.out.println("S: recibido: " + R);
+		System.out.println("S: Descifrando R...");
 		
 		//medir tiempo que se demora en descifrar RETO
 		tiempo.iniciar(Tiempo.VERIFICACION_RETO);
 		String rta = llaveRSA.descifrarMensaje(llavePrivada, R);
 		tiempo.detener(Tiempo.VERIFICACION_RETO);
 		
-		//System.out.println("S: Rta = "+rta);
-
 		//Enviar rta
 		pOut.println(rta);
+		System.out.println("S: Envío Rta = "+rta);
 
 		//Leer "OK" o "ERROR"
 		String respuestaCliente = pIn.readLine();
@@ -175,7 +163,8 @@ public class ProtocoloServidorIterativo {
 		//medir tiempo que se demora en generar P, G y Gx
 		System.out.println("S: Generando G, P y Gx...");
 		tiempo.iniciar(Tiempo.GENERAR_PG_GX);
-		dh.generarPyG(SSLPath);
+		//dh.generarPyG(SSLPath);
+		dh.generarPyGPorDefault();
 		tiempo.detener(Tiempo.GENERAR_PG_GX);
 		
 		BigInteger P = dh.darP();
@@ -193,6 +182,8 @@ public class ProtocoloServidorIterativo {
 
 		//mandar G^x mod p = Y
 		pOut.println(Y);
+
+		System.out.println("S: Envío G, P y Gx");
 
 		//crear firma
 		byte[] firmaCifrado = this.llaveRSA.firmarValores(P, G, Y, this.privateKeyServidor);

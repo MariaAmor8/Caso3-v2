@@ -24,7 +24,7 @@ public class Tiempo {
 
     // Método para detener el conteo del tiempo y calcular el delta para un proceso específico
     public void detener(int proceso) {
-        long delta = (System.nanoTime() - startTimes[proceso]) / 1_000_000; // Convertir a milisegundos
+        long delta = (System.nanoTime() - startTimes[proceso]); // Convertir a milisegundos
         
         // Si el proceso es CIFRAR_PAQUETE_ASIMETRICO, sumar el delta a VERIFICACION_CONSULTA
         if (proceso == CIFRAR_PAQUETE_ASIMETRICO) {
@@ -36,10 +36,10 @@ public class Tiempo {
 
     // Método para imprimir los resultados de los tiempos de cada proceso
     public void imprimirResultados() {
-        System.out.println("Tiempos de cada proceso en milisegundos:");
-        System.out.println("Verificación de Reto: " + deltas[VERIFICACION_RETO] + " ms");
-        System.out.println("Generación de P, G y Gx: " + deltas[GENERAR_PG_GX] + " ms");
-        System.out.println("Verificación de Consulta: " + deltas[VERIFICACION_CONSULTA] + " ms");
+        System.out.println("Tiempos de cada proceso:");
+        System.out.println("Verificación de Reto: " + deltas[VERIFICACION_RETO] + " ns");
+        System.out.println("Generación de P, G y Gx: " + deltas[GENERAR_PG_GX] + " ns");
+        System.out.println("Verificación de Consulta: " + deltas[VERIFICACION_CONSULTA] + " ns");
     }
 }
 

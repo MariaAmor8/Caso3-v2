@@ -34,14 +34,9 @@ public class DiffieHellman {
 		reader.close();
 		process.waitFor();
 		
-		//System.out.println(output.toString());
-		
 		// Extraer prime y generator a partir de output
         BigInteger prime = extractPrime(output.toString());
         BigInteger generator = extractGenerator(output.toString());
-
-        //System.out.println("Prime (BigInteger): " + prime);
-        //System.out.println("Generator (BigInteger): " + generator);
         
         this.P = prime;
         this.G = generator;
@@ -101,5 +96,16 @@ public class DiffieHellman {
 	
 	public BigInteger darG() {
 		return this.G;
+	}
+
+	public void generarPyGPorDefault(){
+		BigInteger pDefault = new BigInteger(
+        "00b49007f4f68c9c2a8a627c7c9f01559b21fa2a0f34b7c3dd620d07e2e56e2dc7976a0b3d91861ac7229b8ab6ee6a2c449ce31345629a1eda85b81705f4390129a9642e4b3643a4f8b6c2d6937ead43727bf1e5873e2749a23de4aedfcfea70fa051faa9feea1a78f571ef4ded5c117693a359212e2c6f5b6672c72bee4abb37", 16);
+		
+		BigInteger gDefault = new BigInteger("2", 10);
+
+		this.P = pDefault;
+		this.G = gDefault;
+	
 	}
 }
