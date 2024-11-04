@@ -24,7 +24,7 @@ public class ServidorIterativo extends Thread {
 		}
 	}
 
-	
+	/*/
 	public void iniciar() throws IOException {
 		ServerSocket ss = null;
 
@@ -49,6 +49,7 @@ public class ServidorIterativo extends Thread {
 
 	    	// se ejecuta el protocolo en el lado servidor
 	    	ProtocoloServidorIterativo psi = new ProtocoloServidorIterativo();
+
 	    	psi.procesar(lector, escritor, deposito, this.cifradoSimetrico, this.tiempo, this.SSLPath);
 
 	    	// se cierran los flujos y el socket
@@ -61,6 +62,51 @@ public class ServidorIterativo extends Thread {
 	    }
 
 	}
+		/*/ 
+
+		public void iniciar() throws IOException {
+			ServerSocket ss = null;
+	
+			try {
+				ss = new ServerSocket(PUERTO);
+				System.out.println("Servidor iterativo esperando conexiones en el puerto " + PUERTO);
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(-1);
+			}
+	
+			// Espera y acepta la conexión de un cliente
+			Socket socket = ss.accept();
+			System.out.println("Cliente conectado");
+	
+			try (
+				PrintWriter escritor = new PrintWriter(socket.getOutputStream(), true);
+				BufferedReader lector = new BufferedReader(new InputStreamReader(socket.getInputStream()))
+			) {
+				// Se ejecuta el protocolo en el lado servidor
+				ProtocoloServidorIterativo psi = new ProtocoloServidorIterativo();
+	
+				// Bucle para procesar múltiples consultas del cliente
+				int consultas = 0;
+				while (consultas < 32) {
+					// Procesa una consulta
+					psi.procesar(lector, escritor, deposito, this.cifradoSimetrico, this.tiempo, this.SSLPath);
+	
+					// Espera un mensaje del cliente para saber si debe continuar
+					String mensaje = lector.readLine();
+					if ("TERMINAR".equals(mensaje)) {
+						System.out.println("S: Cliente ha terminado la conexión");
+						consultas++; 
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				// Cierra el socket después de que el cliente haya terminado todas sus consultas
+				socket.close();
+				System.out.println("Conexión cerrada");
+			}
+		}
 	
 	public void setDeposito(Deposito dep) {
 		deposito = dep;

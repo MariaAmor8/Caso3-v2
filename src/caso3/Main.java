@@ -1,6 +1,5 @@
 package caso3;
 import java.io.IOException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Scanner;
@@ -44,11 +43,6 @@ public class Main {
 			scanner.nextLine();
 			if(opcion==1) {
 				llaveRSA.generarLlaves();
-				System.out.println("Rescatemos llaves :))");
-				Key llavePrivada = llaveRSA.rescatarLlave("privada");
-				System.out.println("Llave privada: " + llavePrivada.getFormat());
-				Key llavePublica  =llaveRSA.rescatarLlave("publica");
-				System.out.println("Llave publica: " + llavePublica.getFormat());
 				continuar = false;
 			}
 			else {
@@ -61,7 +55,7 @@ public class Main {
 		boolean cifradoSimetrico = false;
 		scanner.nextLine();
 		if(opcion == 2) {
-			System.out.println("------ servidor iterativo ------");
+			System.out.println("---------------- Servidor iterativo ----------------");
 			System.out.println("1. Cifrado del paquete con llave simetrica");
 			System.out.println("2. Cifrado del paquete con llave asimetrica");
 			int opcionCif = scanner.nextInt();

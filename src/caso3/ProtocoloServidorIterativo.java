@@ -42,7 +42,7 @@ public class ProtocoloServidorIterativo {
 				// mandar vector de inicialización vi
 				byte[] vi = this.cifradoAES.generarIV();
 				String viString = Base64.getEncoder().encodeToString(vi);
-				System.out.println("S: VI " + viString);
+				//System.out.println("S: VI " + viString);
 				pOut.println(viString);
 				
 				//medir el tiempo que se demora en verificar la consulta
@@ -50,7 +50,6 @@ public class ProtocoloServidorIterativo {
 				verificarConsulta(pIn, pOut, vi);
 				tiempo.detener(Tiempo.VERIFICACION_CONSULTA);
 				
-				System.out.println("S: hash map paquetes: " +deposito.getPaquetes().toString());
 			}
 		}
 		else {
@@ -71,7 +70,7 @@ public class ProtocoloServidorIterativo {
 
 		//Verificar que el id del cliente si es calculando y comparando su hash
 		boolean isIdCliente = this.cifradoHMAC.verificarHMac(llaveHMAC,uidDescifrado,hashUid);
-		System.out.println("S: is id cliente?: " + isIdCliente);
+		//System.out.println("S: is id cliente?: " + isIdCliente);
 
 		//leer id del paquete del cliente cifrado
 		String idPaqueteCifrado = pIn.readLine();
@@ -84,7 +83,7 @@ public class ProtocoloServidorIterativo {
 
 		//Verificar que el id del cliente si es calculando y comparando su hash
 		boolean isIdPaquete = this.cifradoHMAC.verificarHMac(llaveHMAC,idPaqueteDescifrado,hashPaqueteId);
-		System.out.println("S: is id paquete?: " + isIdPaquete);
+		//System.out.println("S: is id paquete?: " + isIdPaquete);
 
 		//buscar estado del paquete
 		//Si no coinciden el id del cliente con el hash, o el paquete con el hash retorna desconocido
@@ -118,10 +117,12 @@ public class ProtocoloServidorIterativo {
 		pOut.println(hashEstado);
 
 		//leer terminar
+		/*/
 		String terminar = pIn.readLine();
 		if(terminar.equals("TERMINAR")) {
 			System.out.println("S: conexión finalizada");
 		}
+		/*/ 
 
 	}
 
@@ -134,22 +135,22 @@ public class ProtocoloServidorIterativo {
 		this.privateKeyServidor = llavePrivada;
 		this.publicKeyServidor = llavePublica;
 
-		System.out.println("S: Llave publica rescatada: " + llavePublica.getFormat());
-		System.out.println("S: Llave privada rescatada: " + llavePrivada.getFormat());
+		System.out.println("S: Llave publica rescatada");
+		System.out.println("S: Llave privada rescatada");
 
 		String inputLine = pIn.readLine();
 		System.out.println("S: palabra de inicio recibida: "+ inputLine);
 
 		//Recibir R  y calcular Rta > rta = descifrar con llave privada R
 		String R = pIn.readLine();
-		System.out.println("S: recibido: " + R);
+		//System.out.println("S: recibido: " + R);
 		
 		//medir tiempo que se demora en descifrar RETO
 		tiempo.iniciar(Tiempo.VERIFICACION_RETO);
 		String rta = llaveRSA.descifrarMensaje(llavePrivada, R);
 		tiempo.detener(Tiempo.VERIFICACION_RETO);
 		
-		System.out.println("S: Rta = "+rta);
+		//System.out.println("S: Rta = "+rta);
 
 		//Enviar rta
 		pOut.println(rta);
@@ -172,6 +173,7 @@ public class ProtocoloServidorIterativo {
 	private boolean diffieHellman(PrintWriter pOut, BufferedReader pIn) throws Exception {
 		DiffieHellman dh = new DiffieHellman();
 		//medir tiempo que se demora en generar P, G y Gx
+		System.out.println("S: Generando G, P y Gx...");
 		tiempo.iniciar(Tiempo.GENERAR_PG_GX);
 		dh.generarPyG(SSLPath);
 		tiempo.detener(Tiempo.GENERAR_PG_GX);
@@ -179,9 +181,9 @@ public class ProtocoloServidorIterativo {
 		BigInteger P = dh.darP();
 		BigInteger G = dh.darG();
 		BigInteger X = dh.generarXAleatorio(P);
-		System.out.println("S: mi X: "+X);
+		//System.out.println("S: mi X");
 		BigInteger Y = dh.calcularY(G, X, P);
-		System.out.println("S: G^x mod p (o sea Y): " + Y);
+		//System.out.println("S: G^x mod p (o sea Y)");
 
 		//mandar G
 		pOut.println(G);
@@ -200,7 +202,7 @@ public class ProtocoloServidorIterativo {
 
 		//leer si diffie hellman funcionó
 		String isDH = pIn.readLine();
-		System.out.println("S: dh funcionó? "+isDH);
+		//System.out.println("S: dh funcionó? "+isDH);
 
 		if(isDH.equals("OK")) {
 			//calcular llave secreta diffie hellman
@@ -208,7 +210,7 @@ public class ProtocoloServidorIterativo {
 			BigInteger yCliente = new BigInteger(YCliente);
 
 			this.llaveSecretaDH = dh.calcularY(yCliente, X, P);
-			System.out.println("S: Mi llave secreta de DH: " + llaveSecretaDH);
+			//System.out.println("S: Mi llave secreta de DH");
 			return true;
 		}
 		else {

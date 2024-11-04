@@ -57,37 +57,38 @@ public class ProtocoloClienteIterativo {
 		//leer vector de inicializacion
 		String vi = pIn.readLine();
 		byte[] VI = Base64.getDecoder().decode(vi);
-		System.out.println("C: VI " + vi);
+		//System.out.println("C: VI");
 		
-		System.out.println("C: id " + this.idCliente);
+		System.out.println("C: id cliente" + this.idCliente);
 		
 		//mandar cifrado el id del Cliente con la llave EAS
 		String uidCifrado = this.cifradoAES.cifrarMensajeAES(llaveAES, this.idCliente+"", VI);
 		pOut.println(uidCifrado);
-		System.out.println("C: uidCifrado= " +uidCifrado);
+		//System.out.println("C: uidCifrado");
 		
 		//mandar el hash con el usuario del id - HMAC
 		String hashUid = this.cifradoHMAC.cifrarConHMAC(this.idCliente+"", this.llaveHMAC);
 		pOut.println(hashUid);
-		System.out.println("C: HMAC uidCliente= " +hashUid);
+		//System.out.println("C: HMAC uidCliente");
 		
 		//mandar cifrado el id del paquete del cliente
 		String idPaqueteCifrado = this.cifradoAES.cifrarMensajeAES(llaveAES, this.idCliente+"", VI);
 		pOut.println(idPaqueteCifrado);
-		System.out.println("C: id Paquete cifrado= " +idPaqueteCifrado);
+		//System.out.println("C: id Paquete cifrado");
 		
 		//mandar hash del id del paquete del cliente
 		String hashPaqueteId = this.cifradoHMAC.cifrarConHMAC(this.idPaquete+"", this.llaveHMAC);
 		pOut.println(hashPaqueteId);
-		System.out.println("C: HMAC paquete id= " +hashPaqueteId);
+		//System.out.println("C: HMAC paquete id");
 		
 		//leer estado cifrado, descifrar y comparar con el hash
 		String estadoCifrado = pIn.readLine();
 		String estado = this.cifradoAES.descifrarAES(llaveAES, estadoCifrado);
 		String hashEstado = pIn.readLine();
-		boolean isEqual = this.cifradoHMAC.verificarHMac(llaveHMAC, estado, hashEstado);
-		System.out.println("C: es igual? " + isEqual);
-		System.out.println("C: esado del paquete " + estado);
+		//boolean isEqual = this.cifradoHMAC.verificarHMac(llaveHMAC, estado, hashEstado);
+		this.cifradoHMAC.verificarHMac(llaveHMAC, estado, hashEstado);
+		//System.out.println("C: es igual? " + isEqual);
+		//System.out.println("C: estado del paquete " + estado);
 		
 		//Enviar "TERMINAR"
 		pOut.println("TERMINAR");
@@ -99,7 +100,7 @@ public class ProtocoloClienteIterativo {
 		//leer llave (publica) de arhivo
 		PublicKey llavePublica = (PublicKey) llaveRSA.rescatarLlave("publica");
 		this.publicKeyServidor = llavePublica;
-		System.out.println("C: Llave publica rescatada: " + llavePublica.getFormat());
+		System.out.println("C: Llave publica rescatada");
 
 		//enviar palabra de inicio
 		String palabraInic = "SECINIT";
@@ -109,11 +110,11 @@ public class ProtocoloClienteIterativo {
 		//cifrar RETO y mandarlo
 		String RetoCifrado = llaveRSA.cifrarMensaje(llavePublica, "Reto");
 		pOut.println(RetoCifrado);
-		System.out.println("C: Envió RETO cifrado: "+RetoCifrado);
+		//System.out.println("C: Envió RETO cifrado");
 
 		//leer rta y comprar
 		String rta = pIn.readLine();
-		System.out.println("C: Rta recibida: " + rta);
+		//System.out.println("C: Rta recibida");
 		if(rta.equals("Reto")) {
 			pOut.println("OK");
 			System.out.println("C: OK");
@@ -139,9 +140,9 @@ public class ProtocoloClienteIterativo {
 		String gx = pIn.readLine();
 		BigInteger Y = new BigInteger(gx);
 		
-		System.out.println("C: Recibido G: "+ g);
-		System.out.println("C: Recibido p: "+ p);
-		System.out.println("C: Recibido g^x mod p: "+ Y);
+		//System.out.println("C: Recibido G");
+		//System.out.println("C: Recibido p");
+		//System.out.println("C: Recibido g^x mod p");
 		
 		//leer firma
 		String firmaCifrada = pIn.readLine();
@@ -150,9 +151,9 @@ public class ProtocoloClienteIterativo {
 		
 		//verificar Firma
 		BigInteger[] resultado = this.llaveRSA.verificarFirma(P, G, Y, this.publicKeyServidor, firmaCifradabytes);
-		System.out.println("C: Firma descifrada P: " + resultado[0]);
-		System.out.println("C: Firma descifrada G: " + resultado[1]);
-		System.out.println("C: Firma descifrada Y: " + resultado[2]);
+		//System.out.println("C: Firma descifrada P");
+		//System.out.println("C: Firma descifrada G");
+		//System.out.println("C: Firma descifrada Y");
 		
 		this.P = resultado[0];
 		this.G = resultado[1];
@@ -160,7 +161,7 @@ public class ProtocoloClienteIterativo {
 		
 		
 		if(resultado[0].equals(P) && resultado[1].equals(G) && resultado[2].equals(Y)) {
-			System.out.println("C: diffieHellman OK");
+			System.out.println("C: Diffie-Hellman OK");
 			return true;
 		}
 		else {
@@ -176,7 +177,7 @@ public class ProtocoloClienteIterativo {
 		
 		//Calcular (G^x)^y
 		this.X = dh.generarXAleatorio(this.P);
-		System.out.println("C: mi X: " + this.X);
+		//System.out.println("C: mi X");
 		BigInteger YCliente = dh.calcularY(this.G, this.X, this.P);
 		
 		//comunicar YCliente
@@ -184,7 +185,7 @@ public class ProtocoloClienteIterativo {
 		
 		//calcular Llave secreta Cliente > z = (YServidor)^x mod p
 		this.llaveSecretaDH = dh.calcularY(this.YServidor, this.X, this.P);
-		System.out.println("C: Mi llave secreta de DH: " + llaveSecretaDH);
+		//System.out.println("C: Mi llave secreta de DH");
 		
 	}
 	

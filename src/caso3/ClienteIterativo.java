@@ -16,6 +16,7 @@ public class ClienteIterativo extends Thread{
 	public void run() {
 		//System.out.println("Cliente I ");
 		try {
+
 			iniciar();
 			
 		} catch (Exception e) {
@@ -48,8 +49,13 @@ public class ClienteIterativo extends Thread{
 
 		// se ejecuta el protocolo en el lado cliente
 		ProtocoloClienteIterativo pci = new ProtocoloClienteIterativo();
-		pci.procesar(stdIn, lector, escritor, this.idCliente, this.idPaquete);
 
+		// Realiza 32 consultas al servidor usando el mismo socket
+		for (int i = 0; i < 32; i++) {
+			System.out.println("============ Ejecutando consulta #"+ (i + 1)+"============");
+			pci.procesar(new BufferedReader(new InputStreamReader(System.in)), lector, escritor, this.idCliente, this.idPaquete);
+		}
+		
 
 		// se cierran los flujos y el socket
 		stdIn.close();

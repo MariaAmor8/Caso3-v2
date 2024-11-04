@@ -40,8 +40,8 @@ public class DiffieHellman {
         BigInteger prime = extractPrime(output.toString());
         BigInteger generator = extractGenerator(output.toString());
 
-        System.out.println("Prime (BigInteger): " + prime);
-        System.out.println("Generator (BigInteger): " + generator);
+        //System.out.println("Prime (BigInteger): " + prime);
+        //System.out.println("Generator (BigInteger): " + generator);
         
         this.P = prime;
         this.G = generator;
