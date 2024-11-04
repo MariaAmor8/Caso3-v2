@@ -1,9 +1,9 @@
 package caso3;
-import java.util.Scanner;
 import java.io.IOException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Scanner;
 
 public class Main {
 	public static RSAKey llaveRSA = new RSAKey();
@@ -75,7 +75,37 @@ public class Main {
 		}
 		else if(opcion == 3) {
 			System.out.println("------ Servidor con delegados ------");
+			
+			// Solicita el número máximo de delegados y el número de clientes
+			System.out.print("Ingrese el número máximo de delegados concurrentes: ");
+			int maxDelegados = scanner.nextInt();
+			scanner.nextLine(); // Limpiar el buffer
+			System.out.print("Ingrese el número máximo de clientes concurrentes: ");
+			int maxClientes = scanner.nextInt();
+			scanner.nextLine(); // Limpiar el buffer
+			
+			// Instancia las clases necesarias para el servidor
+			Deposito deposito = new Deposito(); // Asegúrate de que Deposito esté correctamente inicializado
+			Tiempo tiempo = new Tiempo();  
+			boolean cifraSimet= false;     // Asegúrate de que Tiempo esté correctamente inicializado
+			//boolean cifradoSimetrico = false;    // O ajusta según la opción de cifrado deseada
+			
+			// Crear e iniciar el servidor en un hilo separado
+			ServidorDelegado servidor = new ServidorDelegado(deposito, cifraSimet, tiempo, maxDelegados,SSLPath);
+			Thread servidorThread = new Thread(() -> servidor.iniciar());
+			servidorThread.start();
+			// Inicia los clientes delegados con la cantidad especificada
+			ClienteConDelegados.iniciar(maxClientes);
+		
+			// Espera a que el servidor termine (opcional)
+			try {
+				servidorThread.join();
+			} catch (InterruptedException e) {
+				System.err.println("Error al esperar que el servidor termine.");
+				e.printStackTrace();
+			}
 		}
+		
 
 		else {
 			System.out.println("opcion no valida");
