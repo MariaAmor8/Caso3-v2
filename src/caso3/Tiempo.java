@@ -41,15 +41,16 @@ public class Tiempo {
         System.out.println("Cifrado del paquete: " + deltas[CIFRAR_PAQUETE] + " ns");
     }
     public void imprimirResultadosDelegados() {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("resultadostiempodelegados.txt"))) {
-        writer.write("Tiempos de cada proceso:\n");
-        writer.write("Verificación de Reto: " + deltas[VERIFICACION_RETO] + " ns\n");
-        writer.write("Generación de P, G y Gx: " + deltas[GENERAR_PG_GX] + " ns\n");
-        writer.write("Verificación de Consulta: " + deltas[VERIFICACION_CONSULTA] + " ns\n");
-        writer.write("Cifrado del paquete: " + deltas[CIFRAR_PAQUETE] + " ns\n");
-    } catch (IOException e) {
-        System.out.println("Error al escribir en el archivo: " + e.getMessage());
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("resultados.txt", true))) { // true activa el modo append
+            writer.write("Tiempos de cada proceso:\n");
+            writer.write("Verificación de Reto: " + deltas[VERIFICACION_RETO] + " ns\n");
+            writer.write("Generación de P, G y Gx: " + deltas[GENERAR_PG_GX] + " ns\n");
+            writer.write("Verificación de Consulta: " + deltas[VERIFICACION_CONSULTA] + " ns\n");
+            writer.write("Cifrado del paquete: " + deltas[CIFRAR_PAQUETE] + " ns\n");
+            writer.write("\n"); // Añade una línea en blanco entre llamadas
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo: " + e.getMessage());
+        }
     }
-}
 }
 
