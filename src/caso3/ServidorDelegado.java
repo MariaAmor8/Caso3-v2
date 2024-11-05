@@ -50,6 +50,7 @@ public class ServidorDelegado {
 	}
     public void imprimirResultados() {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter("resultados.txt", true))) { 
+        writer.write("Tiempos para "+ maxDelegados+" delegados\n");
     } catch (IOException e) {
         System.out.println("Error al escribir en el archivo: " + e.getMessage());
     }
