@@ -9,13 +9,11 @@ public class ServidorDelegado {
     public static final int PUERTO = 3400;
     private Deposito deposito;
     private boolean cifradoSimetrico;
-    private Tiempo tiempo;
     private int maxDelegados; // Número máximo de delegados concurrentes
     String SSLPath;
-    public ServidorDelegado(Deposito deposito, boolean cifradoSimetrico, Tiempo tiempo, int maxDelegados,String SSLPath) {
+    public ServidorDelegado(Deposito deposito, boolean cifradoSimetrico, int maxDelegados,String SSLPath) {
         this.deposito = deposito;
         this.cifradoSimetrico = cifradoSimetrico;
-        this.tiempo = tiempo;
         this.maxDelegados = maxDelegados;
         this.SSLPath=SSLPath;
     }
@@ -31,7 +29,8 @@ public class ServidorDelegado {
                 System.out.println("Nuevo cliente conectado ");
 
                 // Crear un delegado para manejar la conexión del cliente
-                ManejadorCliente delegado = new ManejadorCliente(clientSocket, deposito, cifradoSimetrico, tiempo,SSLPath);
+                Tiempo tiempoConsulta = new Tiempo();
+                ManejadorCliente delegado = new ManejadorCliente(clientSocket, deposito, cifradoSimetrico, tiempoConsulta,SSLPath);
                 delegado.start(); // Iniciar el hilo para manejar al cliente
                 delegadosActivos++;
             }

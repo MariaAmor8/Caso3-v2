@@ -1,5 +1,9 @@
 package caso3;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Tiempo {
 
     // Constantes para los diferentes procesos
@@ -36,5 +40,16 @@ public class Tiempo {
         System.out.println("Verificación de Consulta: " + deltas[VERIFICACION_CONSULTA] + " ns");
         System.out.println("Cifrado del paquete: " + deltas[CIFRAR_PAQUETE] + " ns");
     }
+    public void imprimirResultadosDelegados() {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("resultadostiempodelegados.txt"))) {
+        writer.write("Tiempos de cada proceso:\n");
+        writer.write("Verificación de Reto: " + deltas[VERIFICACION_RETO] + " ns\n");
+        writer.write("Generación de P, G y Gx: " + deltas[GENERAR_PG_GX] + " ns\n");
+        writer.write("Verificación de Consulta: " + deltas[VERIFICACION_CONSULTA] + " ns\n");
+        writer.write("Cifrado del paquete: " + deltas[CIFRAR_PAQUETE] + " ns\n");
+    } catch (IOException e) {
+        System.out.println("Error al escribir en el archivo: " + e.getMessage());
+    }
+}
 }
 
