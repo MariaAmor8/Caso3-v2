@@ -35,6 +35,7 @@ public class ManejadorCliente extends Thread {
             protocolo.procesar(lector, escritor, deposito, cifradoSimetrico, tiempo,SSLPath);
 
             System.out.println("Cliente procesado y desconectado ");
+            tiempo.imprimirResultadosDelegados();
 
         } catch (Exception e) {
             System.err.println("Error en el delegado del cliente: " + e.getMessage());
