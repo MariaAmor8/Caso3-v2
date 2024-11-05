@@ -1,5 +1,7 @@
 package caso3;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -33,6 +35,7 @@ public class ServidorDelegado {
                 ManejadorCliente delegado = new ManejadorCliente(clientSocket, deposito, cifradoSimetrico, tiempoConsulta,SSLPath);
                 delegado.start(); // Iniciar el hilo para manejar al cliente
                 delegadosActivos++;
+                imprimirResultados();
             }
 
             System.out.println("Número máximo de delegados alcanzado.");
@@ -45,4 +48,10 @@ public class ServidorDelegado {
     public void setSSLPath(String SSLPath){
 		this.SSLPath = SSLPath;
 	}
+    public void imprimirResultados() {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("resultados.txt", true))) { 
+    } catch (IOException e) {
+        System.out.println("Error al escribir en el archivo: " + e.getMessage());
+    }
+}
 }
