@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.util.Base64;
 
 import javax.crypto.SecretKey;
@@ -107,14 +108,15 @@ public class ProtocoloClienteIterativo {
 		System.out.println("C: SECINIT enviado");
 
 		//cifrar RETO y mandarlo
-		String RetoCifrado = llaveRSA.cifrarMensaje(llavePublica, "Reto");
+		String reto = generarReto();
+		String RetoCifrado = llaveRSA.cifrarMensaje(llavePublica, reto);
 		pOut.println(RetoCifrado);
 		System.out.println("C: R enviado");
 
 		//leer rta y comprar
 		String rta = pIn.readLine();
 		System.out.println("C: Verificando Rta...");
-		if(rta.equals("Reto")) {
+		if(rta.equals(reto)) {
 			pOut.println("OK");
 			System.out.println("C: OK");
 			return true;
@@ -193,6 +195,12 @@ public class ProtocoloClienteIterativo {
 		byte[] digest = md.digest(inputBytes);
 
 		return digest;
+	}
+
+	public static String generarReto() {
+        SecureRandom random = new SecureRandom();
+        BigInteger reto = new BigInteger(118, random);
+        return reto.toString();
 	}
 	
 
