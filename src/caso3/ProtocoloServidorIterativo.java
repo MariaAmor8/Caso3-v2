@@ -168,13 +168,14 @@ public class ProtocoloServidorIterativo {
 		tiempo.iniciar(Tiempo.GENERAR_PG_GX);
 		//dh.generarPyG(SSLPath);
 		dh.generarPyGPorDefault();
-		tiempo.detener(Tiempo.GENERAR_PG_GX);
+		//tiempo.detener(Tiempo.GENERAR_PG_GX);
 		
 		BigInteger P = dh.darP();
 		BigInteger G = dh.darG();
 		BigInteger X = dh.generarXAleatorio(P);
 		//System.out.println("S: mi X");
 		BigInteger Y = dh.calcularY(G, X, P);
+		tiempo.detener(Tiempo.GENERAR_PG_GX);
 		//System.out.println("S: G^x mod p (o sea Y)");
 
 		//mandar G
