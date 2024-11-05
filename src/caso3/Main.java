@@ -76,7 +76,7 @@ public class Main {
 			int maxClientes = scanner.nextInt();
 			scanner.nextLine();
 			Deposito deposito = new Deposito(); 
-			Tiempo tiempo = new Tiempo(); 
+			//Tiempo tiempo = new Tiempo(); 
 			System.out.println("1. Cifrado del paquete con llave simetrica");
 			System.out.println("2. Cifrado del paquete con llave asimetrica");
 			int opcionCif = scanner.nextInt();
@@ -84,7 +84,7 @@ public class Main {
 			if(opcionCif == 1) {
 				cifradoSimetrico = true;
 			}
-			ServidorDelegado servidor = new ServidorDelegado(deposito, cifradoSimetrico, tiempo, maxDelegados, SSLPath);
+			ServidorDelegado servidor = new ServidorDelegado(deposito, cifradoSimetrico, maxDelegados, SSLPath);
 			Thread servidorThread = new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -96,8 +96,8 @@ public class Main {
 			try {
 				servidorThread.join();
 				System.out.println("TERMINO");
-				System.out.println("Tiempos: ");
-				tiempo.imprimirResultados();
+				//System.out.println("Tiempos: ");
+				//tiempo.imprimirResultados();
 			} catch (InterruptedException e) {
 				System.err.println("Error al esperar que el servidor termine.");
 				e.printStackTrace();
