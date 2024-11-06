@@ -36,6 +36,7 @@ public class ManejadorCliente extends Thread {
 
             System.out.println("Cliente procesado y desconectado ");
             tiempo.imprimirResultadosDelegados();
+            
 
         } catch (Exception e) {
             System.err.println("Error en el delegado del cliente: " + e.getMessage());
