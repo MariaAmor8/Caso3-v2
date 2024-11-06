@@ -35,7 +35,7 @@ public class ServidorDelegado {
                 ManejadorCliente delegado = new ManejadorCliente(clientSocket, deposito, cifradoSimetrico, tiempoConsulta,SSLPath);
                 delegado.start(); // Iniciar el hilo para manejar al cliente
                 delegadosActivos++;
-                imprimirResultados();
+                //imprimirResultados();
             }
 
             System.out.println("Número máximo de delegados alcanzado.");

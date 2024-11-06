@@ -1,4 +1,6 @@
 package caso3;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -18,6 +20,13 @@ public class Main {
 		}
 
 	}
+	public void imprimirResultados(int maxDelegados, int maxClientes ) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("resultados.txt", true))) { 
+        writer.write("Tiempos para "+ maxDelegados+" servidores delegados y "+maxClientes+" clientes delegados\n");
+    } catch (IOException e) {
+        System.out.println("Error al escribir en el archivo: " + e.getMessage());
+    }
+}
 	
 	public void imprmirMenu() {
 		System.out.println("--------------- Menu ---------------");
@@ -75,6 +84,7 @@ public class Main {
 			System.out.print("Ingrese el número máximo de clientes concurrentes: ");
 			int maxClientes = scanner.nextInt();
 			scanner.nextLine();
+			main.imprimirResultados(maxDelegados, maxClientes);
 			Deposito deposito = new Deposito(); 
 			//Tiempo tiempo = new Tiempo(); 
 			System.out.println("1. Cifrado del paquete con llave simetrica");

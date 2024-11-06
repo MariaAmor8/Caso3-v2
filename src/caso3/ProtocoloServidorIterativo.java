@@ -144,7 +144,7 @@ public class ProtocoloServidorIterativo {
 		
 		//Enviar rta
 		pOut.println(rta);
-		System.out.println("S: Envío Rta = "+rta);
+		System.out.println("S: Envío Rta");
 
 		//Leer "OK" o "ERROR"
 		String respuestaCliente = pIn.readLine();
@@ -166,8 +166,8 @@ public class ProtocoloServidorIterativo {
 		//medir tiempo que se demora en generar P, G y Gx
 		System.out.println("S: Generando G, P y Gx...");
 		tiempo.iniciar(Tiempo.GENERAR_PG_GX);
-		//dh.generarPyG(SSLPath);
-		dh.generarPyGPorDefault();
+		dh.generarPyG(SSLPath);
+		//dh.generarPyGPorDefault();
 		//tiempo.detener(Tiempo.GENERAR_PG_GX);
 		
 		BigInteger P = dh.darP();

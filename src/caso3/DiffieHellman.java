@@ -22,6 +22,7 @@ public class DiffieHellman {
     }
 	
 	public void generarPyG(String SSLPath) throws Exception {
+		/*/
 		Process process = Runtime.getRuntime().exec(SSLPath+"\\openssl dhparam -text 1024");
 		// Leer la salida del commando
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -34,6 +35,29 @@ public class DiffieHellman {
 		reader.close();
 		process.waitFor();
 		
+		// Extraer prime y generator a partir de output
+        BigInteger prime = extractPrime(output.toString());
+        BigInteger generator = extractGenerator(output.toString());
+        
+        this.P = prime;
+        this.G = generator;
+		/*/
+		Process process = Runtime.getRuntime().exec(SSLPath+"\\openssl dhparam -text 1024");
+        // Leer la salida del commando
+        BufferedReader errreader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String error = errreader.readLine();
+        while (error != null) error = errreader.readLine();
+	    String line;
+	    StringBuilder output = new StringBuilder();
+	    // Almacena toda la salida para procesarla después
+	     while ((line = reader.readLine()) != null) {
+	                output.append(line).append("\n");
+	      }
+	    reader.close();
+        errreader.close();
+        process.waitFor();
+
 		// Extraer prime y generator a partir de output
         BigInteger prime = extractPrime(output.toString());
         BigInteger generator = extractGenerator(output.toString());

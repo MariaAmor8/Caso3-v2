@@ -1,0 +1,204 @@
+Tiempos de cada proceso:
+Verificación de Reto: 3367200 ns
+Generación de P, G y Gx: 10809005300 ns
+Verificación de Consulta: 17563300 ns
+Cifrado del paquete: 264800 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 816900 ns
+Generación de P, G y Gx: 1029189600 ns
+Verificación de Consulta: 4555300 ns
+Cifrado del paquete: 374300 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 741900 ns
+Generación de P, G y Gx: 10759542800 ns
+Verificación de Consulta: 2700400 ns
+Cifrado del paquete: 227800 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1518900 ns
+Generación de P, G y Gx: 10766637000 ns
+Verificación de Consulta: 2929100 ns
+Cifrado del paquete: 240000 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1454600 ns
+Generación de P, G y Gx: 944870900 ns
+Verificación de Consulta: 2115400 ns
+Cifrado del paquete: 164200 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 667600 ns
+Generación de P, G y Gx: 1744090200 ns
+Verificación de Consulta: 2051300 ns
+Cifrado del paquete: 215700 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1009500 ns
+Generación de P, G y Gx: 3060560500 ns
+Verificación de Consulta: 2341800 ns
+Cifrado del paquete: 217300 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 840800 ns
+Generación de P, G y Gx: 2490123300 ns
+Verificación de Consulta: 3684800 ns
+Cifrado del paquete: 257600 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1613800 ns
+Generación de P, G y Gx: 6170008500 ns
+Verificación de Consulta: 2794100 ns
+Cifrado del paquete: 246900 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 756200 ns
+Generación de P, G y Gx: 3299280200 ns
+Verificación de Consulta: 2959100 ns
+Cifrado del paquete: 401900 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 952000 ns
+Generación de P, G y Gx: 4540583600 ns
+Verificación de Consulta: 2794200 ns
+Cifrado del paquete: 845500 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1909400 ns
+Generación de P, G y Gx: 4065449100 ns
+Verificación de Consulta: 2503500 ns
+Cifrado del paquete: 198200 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 604500 ns
+Generación de P, G y Gx: 7967008600 ns
+Verificación de Consulta: 5169300 ns
+Cifrado del paquete: 420100 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 472100 ns
+Generación de P, G y Gx: 208970500 ns
+Verificación de Consulta: 2140100 ns
+Cifrado del paquete: 201500 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1983200 ns
+Generación de P, G y Gx: 9695665800 ns
+Verificación de Consulta: 8360100 ns
+Cifrado del paquete: 617600 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 615200 ns
+Generación de P, G y Gx: 3740124600 ns
+Verificación de Consulta: 3369900 ns
+Cifrado del paquete: 321700 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 2142600 ns
+Generación de P, G y Gx: 3672651100 ns
+Verificación de Consulta: 4439800 ns
+Cifrado del paquete: 361700 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1985300 ns
+Generación de P, G y Gx: 3409395200 ns
+Verificación de Consulta: 3084100 ns
+Cifrado del paquete: 265600 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1307600 ns
+Generación de P, G y Gx: 1161316100 ns
+Verificación de Consulta: 3233900 ns
+Cifrado del paquete: 268500 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1311700 ns
+Generación de P, G y Gx: 3767741400 ns
+Verificación de Consulta: 2747300 ns
+Cifrado del paquete: 235200 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1453800 ns
+Generación de P, G y Gx: 7097262400 ns
+Verificación de Consulta: 2819900 ns
+Cifrado del paquete: 262500 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1280300 ns
+Generación de P, G y Gx: 4690740300 ns
+Verificación de Consulta: 3535500 ns
+Cifrado del paquete: 241000 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1270200 ns
+Generación de P, G y Gx: 13513839900 ns
+Verificación de Consulta: 2972600 ns
+Cifrado del paquete: 216200 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1210600 ns
+Generación de P, G y Gx: 24931875300 ns
+Verificación de Consulta: 2046100 ns
+Cifrado del paquete: 127400 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1207500 ns
+Generación de P, G y Gx: 3698251100 ns
+Verificación de Consulta: 2626900 ns
+Cifrado del paquete: 231700 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1226100 ns
+Generación de P, G y Gx: 3449890100 ns
+Verificación de Consulta: 1469200 ns
+Cifrado del paquete: 127500 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1108300 ns
+Generación de P, G y Gx: 22150585000 ns
+Verificación de Consulta: 1373000 ns
+Cifrado del paquete: 78700 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1351700 ns
+Generación de P, G y Gx: 1774505000 ns
+Verificación de Consulta: 1427700 ns
+Cifrado del paquete: 117300 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 1399800 ns
+Generación de P, G y Gx: 5718912900 ns
+Verificación de Consulta: 2904400 ns
+Cifrado del paquete: 178400 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 2052700 ns
+Generación de P, G y Gx: 9429959700 ns
+Verificación de Consulta: 2531400 ns
+Cifrado del paquete: 175300 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 659600 ns
+Generación de P, G y Gx: 495275200 ns
+Verificación de Consulta: 1342000 ns
+Cifrado del paquete: 76500 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 2553400 ns
+Generación de P, G y Gx: 23860936500 ns
+Verificación de Consulta: 1984900 ns
+Cifrado del paquete: 199500 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 2949500 ns
+Generación de P, G y Gx: 6954411801 ns
+Verificación de Consulta: 13727500 ns
+Cifrado del paquete: 301099 ns
+
+Tiempos de cada proceso:
+Verificación de Reto: 4462800 ns
+Generación de P, G y Gx: 7551902900 ns
+Verificación de Consulta: 14946800 ns
+Cifrado del paquete: 294801 ns
+
