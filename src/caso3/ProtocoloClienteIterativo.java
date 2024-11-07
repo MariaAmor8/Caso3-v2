@@ -88,7 +88,8 @@ public class ProtocoloClienteIterativo {
 		//boolean isEqual = this.cifradoHMAC.verificarHMac(llaveHMAC, estado, hashEstado);
 		this.cifradoHMAC.verificarHMac(llaveHMAC, estado, hashEstado);
 		//System.out.println("C: es igual? " + isEqual);
-		System.out.println("C: Estado del paquete recibido. Estado: " + estado);
+		Paquete pak = new Paquete(-1,-1);
+		System.out.println("C: Estado del paquete recibido. Estado: " + pak.obtenerEstadoPorNumero(Integer.parseInt(estado)));
 		
 		//Enviar "TERMINAR"
 		pOut.println("TERMINAR");

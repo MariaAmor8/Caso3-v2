@@ -89,13 +89,13 @@ public class ProtocoloServidorIterativo {
 		//Si no coinciden el id del cliente con el hash, o el paquete con el hash retorna desconocido
 		String estadoPaquete;
 		if(!isIdCliente || !isIdPaquete) {
-			estadoPaquete = "DESCONOCIDO";
+			estadoPaquete = "6";
 		}
 		else {
 			estadoPaquete = this.depostito.obtenerEstadoPaquete(Integer.parseInt(uidDescifrado), Integer.parseInt(idPaqueteDescifrado));
 		}
-
-		System.out.println("S: Estado del paquete: " + estadoPaquete);	
+		Paquete pak = new Paquete(-1,-1);
+		System.out.println("S: Estado del paquete: " + pak.obtenerEstadoPorNumero(Integer.parseInt(estadoPaquete)));	
 
 		//cifrar estado del paquete y enviar
 

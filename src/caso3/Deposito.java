@@ -46,10 +46,10 @@ public class Deposito {
 
         // Verifica si el paquete existe y el paqueteId coincide
         if (paquete != null && paquete.getId() == paqueteId) {
-            return paquete.obtenerNombreEstado();
+            return paquete.getEstado()+"";
         }
 
-        return "Desconocido";
+        return "6";
     }
     
     

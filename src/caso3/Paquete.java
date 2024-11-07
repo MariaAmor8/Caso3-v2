@@ -64,5 +64,25 @@ public class Paquete {
                 ", estado=" + obtenerNombreEstado() +
                 '}';
     }
-}
 
+    // Método estático para obtener el nombre del estado a partir de un número
+    public String obtenerEstadoPorNumero(int estado) {
+        switch (estado) {
+            case EN_OFICINA:
+                return "EN OFICINA";
+            case RECOGIDO:
+                return "RECOGIDO";
+            case EN_CLASIFICACION:
+                return "EN CLASIFICACION";
+            case DESPACHADO:
+                return "DESPACHADO";
+            case EN_ENTREGA:
+                return "EN ENTREGA";
+            case ENTREGADO:
+                return "ENTREGADO";
+            default:
+                return "DESCONOCIDO";
+        }
+    }
+
+}
